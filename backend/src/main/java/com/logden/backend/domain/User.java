@@ -20,14 +20,16 @@ public class User {
     private String email;
     private String phone;
     private String passwordHash;
+    private String role; 
 
 
-    public User(String firstname, String lastname, String address, String email, String phone) {
+    public User(String firstname, String lastname, String address, String email, String phone, String role) {
         this.firstName = firstname;
         this.lastName = lastname;
         this.address = address;
         this.email = email;
         this.phone = phone;
+        this.role = role;
     }
 
      public User() {
@@ -90,11 +92,24 @@ public class User {
          this.passwordHash = passwordHash;
      }
 
+      public String getRole() {
+         return role;
+     }
+
+     public void setRole(String role) {
+         this.role = role;
+     }
+
      @Override
      public String toString() {
-        return "User [userId=" + userId + ", firstname=" + firstName + ", lastname=" + lastName + ", address=" + address
-                + ", email=" + email + ", phone=" + phone + "]";
+        return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
+                + ", email=" + email + ", phone=" + phone + ", passwordHash=" + passwordHash + ", role=" + role + "]";
      }
+
+
+    
+
+    
 
 
 }
