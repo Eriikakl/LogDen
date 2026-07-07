@@ -8,10 +8,28 @@ Tavoitteena on rakentaa kuvitteellinen full stack verkkokauppasovellus.
 logden/
 ├── .devcontainer/
 ├── backend/ 
-│   ├── src/
+│   ├── src/main/java/com/logden/backend/
+│   │   ├── domain/
+│   │   ├── security/
+│   │   ├── service/
+│   │   ├── web/
+│   │   └──BackendApplication.java
+│   │
 │   ├── pom.xml
-├── frontend/ 
+├── frontend/
+└── docker-compose.yml
 ```
+
+- ```domain/``` sisältää sovelluksen JPA-entiteetit ja repositoryt.
+
+- ```security/``` sisältää Spring Securityn konfiguraation, kuten endpointtien käyttöoikeuksien määrittelyn ja kirjautumisen asetukset.
+
+- ```service/``` sisältää sovelluksen liiketoimintalogiikan.
+
+- ```web/``` sisältää REST-controllerit HTTP-pyynnöille.
+
+- **.devcontainer/** → kehitysympäristö Java/Maven
+- **docker-compose.yml** → tietokantapalvelu
 
 ## Teknologiat
 
@@ -24,6 +42,7 @@ logden/
 - Spring Security
 - Bean Validation
 - Maven
+- PostgreSQL
 
 
 ### Kehitysympäristö
@@ -42,7 +61,13 @@ Ctrl + Shift + P
 --> Dev Containers: Reopen in Container
 ```
 
-### 3. Ajetaan backend
+### 3. Käynnistetään tietokanta
+
+```bash
+docker compose up -d
+```
+
+### 4. Ajetaan backend
 
 ```bash
 cd backend
