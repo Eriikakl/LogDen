@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class CartItem {
@@ -17,14 +19,17 @@ public class CartItem {
     private Long cartItemId;
 
     @ManyToOne
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "cart_id", nullable = false)
     @JsonIgnore
     private Cart cart;
 
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @NotNull
+    @Positive
     private Integer quantity;
 
     public CartItem(Cart cart, Product product, Integer quantity) {

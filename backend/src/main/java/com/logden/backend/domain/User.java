@@ -1,10 +1,14 @@
 package com.logden.backend.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -14,12 +18,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @NotBlank
+    @Size(max = 25)
     private String firstName;
+
+    @NotBlank
+    @Size(max = 25)
     private String lastName;
+
+    @NotBlank
+    @Size(max = 100)
     private String address;
+
+    @NotBlank
+    @Email
+    @Column(unique = true)
     private String email;
+
+    @NotBlank
+    @Size(max = 20)
     private String phone;
+
+    @NotBlank
     private String passwordHash;
+
+    @NotBlank
     private String role; 
 
 

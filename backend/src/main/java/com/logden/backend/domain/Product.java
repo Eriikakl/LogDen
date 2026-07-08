@@ -8,6 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Product {
@@ -16,14 +21,27 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productId;
 
+    @NotBlank
+    @Size(max = 100)
     private String name;
+
+    @Size(max = 500)
     private String description;
+
+    @NotNull
+    @Positive
     private BigDecimal price;
+
+    @NotNull
+    @PositiveOrZero
     private Integer stock;
+
+    @NotNull
     private Boolean active = true;
 
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     public Product(String name, String description, BigDecimal price, Integer stock, Boolean active,
@@ -36,73 +54,69 @@ public class Product {
         this.category = category;
     }
 
-       public Product() {
+    public Product() {
     }
 
-       public Long getProductId() {
-           return productId;
-       }
+    public Long getProductId() {
+        return productId;
+    }
 
-       public void setProductId(Long productId) {
-           this.productId = productId;
-       }
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
 
-       public String getName() {
-           return name;
-       }
+    public String getName() {
+        return name;
+    }
 
-       public void setName(String name) {
-           this.name = name;
-       }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-       public String getDescription() {
-           return description;
-       }
+    public String getDescription() {
+        return description;
+    }
 
-       public void setDescription(String description) {
-           this.description = description;
-       }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-       public BigDecimal getPrice() {
-           return price;
-       }
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-       public void setPrice(BigDecimal price) {
-           this.price = price;
-       }
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-       public Integer getStock() {
-           return stock;
-       }
+    public Integer getStock() {
+        return stock;
+    }
 
-       public void setStock(Integer stock) {
-           this.stock = stock;
-       }
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
 
-       public Boolean getActive() {
-           return active;
-       }
+    public Boolean getActive() {
+        return active;
+    }
 
-       public void setActive(Boolean active) {
-           this.active = active;
-       }
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
-       public Category getCategory() {
-           return category;
-       }
+    public Category getCategory() {
+        return category;
+    }
 
-       public void setCategory(Category category) {
-           this.category = category;
-       }
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
-       @Override
-       public String toString() {
+    @Override
+    public String toString() {
         return "Product [productId=" + productId + ", name=" + name + ", description=" + description + ", price="
                 + price + ", stock=" + stock + ", active=" + active + ", category=" + category + "]";
-       }
-
-    
-
-    
+    }
 
 }

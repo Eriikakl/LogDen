@@ -1,9 +1,12 @@
 package com.logden.backend.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Category {
@@ -12,7 +15,12 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long categoryId;
 
+    @Column(unique = true)
+    @NotBlank
+    @Size(max = 100)
     private String name;
+
+    @Size(max = 500)
     private String description;
 
     public Category(String name, String description) {
