@@ -125,6 +125,15 @@ GET /api/orders
 Hakee kaikki tilaukset.
 
 ---
+#### GET
+
+```http
+GET /api/orders/{id}
+```
+
+Hakee tilauksen tunnisteen perusteella.
+
+---
 #### POST
 
 ```http
