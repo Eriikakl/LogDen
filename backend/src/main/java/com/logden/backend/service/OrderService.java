@@ -38,6 +38,12 @@ public class OrderService {
         this.cartItemRepository = cartItemRepository;
     }
 
+    public Order getOrderById(Long id) {
+        return orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+    }
+
+
     public Order createOrder(Long userId) {
 
         User user = userRepository.findById(userId)
@@ -79,7 +85,8 @@ public class OrderService {
             orderItemRepository.save(orderItem);
         }
 
-        cartItemRepository.deleteAll(cart.getItems());
+        cart.getItems().clear();
+        cartRepository.save(cart);
 
         return order;
     }
