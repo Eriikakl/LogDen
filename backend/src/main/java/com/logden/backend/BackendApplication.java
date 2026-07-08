@@ -73,15 +73,12 @@ public class BackendApplication {
             cartItemRepository.save(new CartItem(cart, product1, 2));
             cartItemRepository.save(new CartItem(cart, product2, 1));
 
-            Order order = orderRepository.save(new Order(user,"PAID", LocalDateTime.now(),new BigDecimal("1099.70")
-            ));
+            Order order = orderRepository.save(new Order(user, "PAID", LocalDateTime.now(), new BigDecimal("1099.70")));
             orderItemRepository.save(new OrderItem(
-                order, product1, 2, product1.getPrice()
-            ));
+                    order, product1, 2, product1.getPrice()));
 
             orderItemRepository.save(new OrderItem(
-                order, product2, 1, product2.getPrice()
-            ));
+                    order, product2, 1, product2.getPrice()));
 
         };
     }
