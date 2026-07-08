@@ -46,6 +46,7 @@ public class BackendApplication {
                     "Testikatu 1, Helsinki",
                     "erkki@example.com",
                     "0401234567",
+                    "salasana",
                     "CUSTOMER"));
 
             Cart cart = cartRepository.save(new Cart(user));

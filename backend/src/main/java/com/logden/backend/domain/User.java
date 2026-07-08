@@ -23,12 +23,13 @@ public class User {
     private String role; 
 
 
-    public User(String firstname, String lastname, String address, String email, String phone, String role) {
+    public User(String firstname, String lastname, String address, String email, String phone, String passwordHash, String role) {
         this.firstName = firstname;
         this.lastName = lastname;
         this.address = address;
         this.email = email;
         this.phone = phone;
+        this.passwordHash = passwordHash;
         this.role = role;
     }
 
