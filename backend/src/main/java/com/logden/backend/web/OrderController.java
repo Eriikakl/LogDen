@@ -26,6 +26,12 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
+    @GetMapping("/{id}")
+    public Order getOrder(@PathVariable Long id) {
+        return orderService.getOrderById(id);
+
+    }
+
     @PostMapping("/user/{userId}")
     public Order createOrder(@PathVariable Long userId) {
         return orderService.createOrder(userId);
