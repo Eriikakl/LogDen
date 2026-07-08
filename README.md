@@ -53,79 +53,100 @@ logden/
 
 REST API: Cart, Category, Order, Product, User
 
-### Ostoskori / Cart
+<details>
+<summary>Ostoskori / Cart</summary>
+
 #### GET
 
 ```http
 GET /api/cart/{id}
 ```
+
 Hakee ostoskorin tunnisteen perusteella.
 
 ---
+
 #### POST
 
 ```http
-POST api/{cartId}/items
+POST /api/{cartId}/items
 ```
+
 Lisää tuotteen ostoskoriin.
 
 ---
+
 #### PUT
 
 ```http
 PUT /api/items/{cartItemId}
 ```
+
 Päivittää ostoskorissa olevan tuotteen määrän.
 
 ---
+
 #### DELETE
 
 ```http
 DELETE /api/items/{cartItemId}
 ```
+
 Poistaa tuotteen ostoskorista.
 
----
+</details>
 
-### Kategoria / Category
+<details>
+<summary>Kategoria / Category</summary>
+
 #### GET
 
 ```http
 GET /api/categories
 ```
+
 Hakee kaikki kategoriat.
 
----
+</details>
 
-### Tilaus / Order
+<details>
+<summary>Tilaus / Order</summary>
+
 #### GET
 
 ```http
 GET /api/orders
 ```
+
 Hakee kaikki tilaukset.
 
----
+</details>
 
-### Tuote / Product
+<details>
+<summary>Tuote / Product</summary>
+
 #### GET
 
 ```http
 GET /api/products
 ```
+
 Hakee kaikki tuotteet.
 
----
+</details>
 
-### Käyttäjä / User
+<details>
+<summary>Käyttäjä / User</summary>
+
 #### GET
 
 ```http
 GET /api/users/{id}
 ```
+
 Hakee käyttäjän tunnisteen perusteella.
 
----
+</details>
 
 ## Setup ja suoritus
 
