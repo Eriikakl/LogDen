@@ -49,6 +49,83 @@ logden/
 - Docker
 - VS Code Dev Containers
 
+## API
+
+REST API: Cart, Category, Order, Product, User
+
+### Ostoskori / Cart
+#### GET
+
+```http
+GET /api/cart/{id}
+```
+Hakee ostoskorin tunnisteen perusteella.
+
+---
+#### POST
+
+```http
+POST api/{cartId}/items
+```
+Lisää tuotteen ostoskoriin.
+
+---
+#### PUT
+
+```http
+PUT /api/items/{cartItemId}
+```
+Päivittää ostoskorissa olevan tuotteen määrän.
+
+---
+#### DELETE
+
+```http
+DELETE /api/items/{cartItemId}
+```
+Poistaa tuotteen ostoskorista.
+
+---
+
+### Kategoria / Category
+#### GET
+
+```http
+GET /api/categories
+```
+Hakee kaikki kategoriat.
+
+---
+
+### Tilaus / Order
+#### GET
+
+```http
+GET /api/orders
+```
+Hakee kaikki tilaukset.
+
+---
+
+### Tuote / Product
+#### GET
+
+```http
+GET /api/products
+```
+Hakee kaikki tuotteet.
+
+---
+
+### Käyttäjä / User
+#### GET
+
+```http
+GET /api/users/{id}
+```
+Hakee käyttäjän tunnisteen perusteella.
+
+---
 
 ## Setup ja suoritus
 
