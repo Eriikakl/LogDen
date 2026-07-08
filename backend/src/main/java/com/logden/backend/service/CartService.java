@@ -72,8 +72,4 @@ public class CartService {
 
         return cartItemRepository.save(item);
     }
-
-    public Cart saveCart(Cart cart) {
-        return cartRepository.save(cart);
-    }
 }
