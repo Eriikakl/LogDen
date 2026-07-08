@@ -69,7 +69,7 @@ Hakee ostoskorin tunnisteen perusteella.
 #### POST
 
 ```http
-POST /api/{cartId}/items
+POST /api/cart/{cartId}/items
 ```
 
 Lisää tuotteen ostoskoriin.
@@ -79,7 +79,7 @@ Lisää tuotteen ostoskoriin.
 #### PUT
 
 ```http
-PUT /api/items/{cartItemId}
+PUT /api/cart/items/{cartItemId}
 ```
 
 Päivittää ostoskorissa olevan tuotteen määrän.
@@ -89,10 +89,12 @@ Päivittää ostoskorissa olevan tuotteen määrän.
 #### DELETE
 
 ```http
-DELETE /api/items/{cartItemId}
+DELETE /api/cart/items/{cartItemId}
 ```
 
 Poistaa tuotteen ostoskorista.
+
+---
 
 </details>
 
@@ -107,6 +109,8 @@ GET /api/categories
 
 Hakee kaikki kategoriat.
 
+---
+
 </details>
 
 <details>
@@ -120,6 +124,16 @@ GET /api/orders
 
 Hakee kaikki tilaukset.
 
+---
+#### POST
+
+```http
+POST /api/orders/user/{userId}
+```
+
+Luo uuden tilauksen käyttäjän ostoskorin tuotteista.
+
+---
 </details>
 
 <details>
@@ -133,6 +147,8 @@ GET /api/products
 
 Hakee kaikki tuotteet.
 
+---
+
 </details>
 
 <details>
@@ -145,6 +161,8 @@ GET /api/users/{id}
 ```
 
 Hakee käyttäjän tunnisteen perusteella.
+
+---
 
 </details>
 
