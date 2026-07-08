@@ -1,4 +1,5 @@
 # LogDen Store
+Kehityksessä.
 
 Tavoitteena on rakentaa kuvitteellinen full stack verkkokauppasovellus.
 
