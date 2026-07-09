@@ -11,6 +11,7 @@ logden/
 ├── backend/ 
 │   ├── src/main/java/com/logden/backend/
 │   │   ├── domain/
+│   │   ├── exception/
 │   │   ├── security/
 │   │   ├── service/
 │   │   ├── web/
@@ -22,6 +23,8 @@ logden/
 ```
 
 - ```domain/``` sisältää sovelluksen JPA-entiteetit ja repositoryt.
+
+- ```exception/``` sisältää keskitetyn virheenkäsittelyn sekä sovelluksen poikkeukset.
 
 - ```security/``` sisältää Spring Securityn konfiguraation, kuten endpointtien käyttöoikeuksien määrittelyn ja kirjautumisen asetukset.
 
