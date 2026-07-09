@@ -111,6 +111,31 @@ GET /api/categories
 Hakee kaikki kategoriat.
 
 ---
+#### POST
+
+```http
+POST /api/categories
+```
+
+Lisää uuden kategorian.
+
+---
+#### PUT
+```http
+PUT /api/categories/{id}
+```
+
+Päivittää olemassa olevan kategorian.
+
+---
+#### DELETE
+```http
+DELETE /api/categories/{id}
+```
+
+Poistaa kategorian tunnisteen perusteella.
+
+---
 
 </details>
 
@@ -158,6 +183,32 @@ GET /api/products
 Hakee kaikki tuotteet.
 
 ---
+#### POST
+
+```http
+POST /api/products
+```
+
+Lisää uuden tuotteen.
+
+---
+#### PUT
+```http
+PUT /api/products/{id}
+```
+
+Päivittää olemassa olevan tuotteen.
+
+---
+#### DELETE
+```http
+DELETE /api/products/{id}
+```
+
+Poistaa tuotteen tunnisteen perusteella.
+
+---
+
 
 </details>
 
