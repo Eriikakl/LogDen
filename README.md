@@ -224,6 +224,42 @@ GET /api/users/{id}
 Hakee käyttäjän tunnisteen perusteella.
 
 ---
+#### POST
+
+```http
+POST /api/users
+```
+
+Lisää uuden käyttäjän.
+
+---
+#### PUT
+
+```http
+PUT /api/users/{id}
+```
+
+Päivittää olemassa olevan käyttäjän.
+
+---
+#### DELETE
+
+```http
+DELETE /api/users/{id}
+```
+
+Poistaa käyttäjän tunnisteen perusteella.
+
+---
+#### GET
+
+```http
+GET /api/users
+```
+
+Hakee kaikki käyttäjät.
+
+---
 
 </details>
 
