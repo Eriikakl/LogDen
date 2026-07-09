@@ -43,10 +43,10 @@ public class User {
     private String passwordHash;
 
     @NotBlank
-    private String role; 
+    private String role = "USER";
 
-
-    public User(String firstname, String lastname, String address, String email, String phone, String passwordHash, String role) {
+    public User(String firstname, String lastname, String address, String email, String phone, String passwordHash,
+            String role) {
         this.firstName = firstname;
         this.lastName = lastname;
         this.address = address;
@@ -56,84 +56,78 @@ public class User {
         this.role = role;
     }
 
-     public User() {
-       
+    public User() {
+
     }
 
-     public Long getUserId() {
-         return userId;
-     }
+    public Long getUserId() {
+        return userId;
+    }
 
-     public void setUserId(Long userId) {
-         this.userId = userId;
-     }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-     public String getFirstName() {
-         return firstName;
-     }
+    public String getFirstName() {
+        return firstName;
+    }
 
-     public void setFirstName(String firstname) {
-         this.firstName = firstname;
-     }
+    public void setFirstName(String firstname) {
+        this.firstName = firstname;
+    }
 
-     public String getLastName() {
-         return lastName;
-     }
+    public String getLastName() {
+        return lastName;
+    }
 
-     public void setLastName(String lastname) {
-         this.lastName = lastname;
-     }
+    public void setLastName(String lastname) {
+        this.lastName = lastname;
+    }
 
-     public String getAddress() {
-         return address;
-     }
+    public String getAddress() {
+        return address;
+    }
 
-     public void setAddress(String address) {
-         this.address = address;
-     }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-     public String getEmail() {
-         return email;
-     }
+    public String getEmail() {
+        return email;
+    }
 
-     public void setEmail(String email) {
-         this.email = email;
-     }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-     public String getPhone() {
-         return phone;
-     }
+    public String getPhone() {
+        return phone;
+    }
 
-     public void setPhone(String phone) {
-         this.phone = phone;
-     }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-      public String getPasswordHash() {
-         return passwordHash;
-     }
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 
-     public void setPasswordHash(String passwordHash) {
-         this.passwordHash = passwordHash;
-     }
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
 
-      public String getRole() {
-         return role;
-     }
+    public String getRole() {
+        return role;
+    }
 
-     public void setRole(String role) {
-         this.role = role;
-     }
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-     @Override
-     public String toString() {
+    @Override
+    public String toString() {
         return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
                 + ", email=" + email + ", phone=" + phone + ", passwordHash=" + passwordHash + ", role=" + role + "]";
-     }
-
-
-    
-
-    
-
+    }
 
 }
