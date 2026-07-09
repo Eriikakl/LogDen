@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +27,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderId;
+
+    @Column(unique = true, nullable = false)
+    private String orderNumber;
 
     @NotNull
     @ManyToOne
@@ -62,6 +66,14 @@ public class Order {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
+    }
+
+      public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public User getUser() {
@@ -109,5 +121,7 @@ public class Order {
         return "Order [orderId=" + orderId + ", status=" + status + ", createdAt=" + createdAt
                 + ", totalPrice=" + totalPrice + "]";
     }
+
+  
 
 }

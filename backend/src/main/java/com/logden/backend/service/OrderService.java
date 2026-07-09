@@ -1,8 +1,11 @@
 package com.logden.backend.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -43,7 +46,6 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException("Order not found"));
     }
 
-
     public Order createOrder(Long userId) {
 
         User user = userRepository.findById(userId)
@@ -72,7 +74,7 @@ public class OrderService {
                 LocalDateTime.now(),
                 totalPrice);
 
-        order = orderRepository.save(order);
+        order.setOrderNumber(generateOrderNumber());
 
         for (CartItem item : cart.getItems()) {
 
@@ -82,9 +84,10 @@ public class OrderService {
                     item.getQuantity(),
                     item.getProduct().getPrice());
 
-            orderItemRepository.save(orderItem);
+            order.getItems().add(orderItem);
         }
 
+        order = orderRepository.save(order);
         cart.getItems().clear();
         cartRepository.save(cart);
 
@@ -95,7 +98,20 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Order saveOrder(Order order) {
-        return orderRepository.save(order);
+    private String generateOrderNumber() {
+        String orderNumber;
+
+        do {
+            orderNumber = "ORD-"
+                    + LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)
+                    + "-"
+                    + UUID.randomUUID()
+                            .toString()
+                            .substring(0, 6)
+                            .toUpperCase();
+
+        } while (orderRepository.existsByOrderNumber(orderNumber));
+
+        return orderNumber;
     }
 }
