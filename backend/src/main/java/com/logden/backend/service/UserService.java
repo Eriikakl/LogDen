@@ -1,11 +1,14 @@
 package com.logden.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.logden.backend.domain.User;
 import com.logden.backend.domain.UserRepository;
+import com.logden.backend.exception.ResourceAlreadyExistsException;
+import com.logden.backend.exception.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -18,12 +21,12 @@ public class UserService {
 
     public User getUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     public User addUser(User user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already exists");
+            throw new ResourceAlreadyExistsException("Email already exists");
         }
         return userRepository.save(user);
     }
@@ -31,7 +34,12 @@ public class UserService {
     public User updateUser(Long id, User updatedUser) {
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        Optional<User> existingUser = userRepository.findByEmail(updatedUser.getEmail());
+        if (existingUser.isPresent() && !existingUser.get().getUserId().equals(id)) {
+            throw new ResourceAlreadyExistsException("Email already exists");
+        }
 
         user.setFirstName(updatedUser.getFirstName());
         user.setLastName(updatedUser.getLastName());
@@ -46,7 +54,7 @@ public class UserService {
     public void deleteUser(Long id) {
 
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         userRepository.delete(user);
     }
