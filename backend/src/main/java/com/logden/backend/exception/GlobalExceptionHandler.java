@@ -65,6 +65,19 @@ public class GlobalExceptionHandler {
                 return ResponseEntity.badRequest().body(error);
         }
 
+        // 400 Bad Request
+        @ExceptionHandler(IllegalArgumentException.class)
+        public ResponseEntity<ErrorResponse> handleIllegalArgumentException(
+                        IllegalArgumentException exception) {
+
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.BAD_REQUEST.value(),
+                                exception.getMessage(),
+                                LocalDateTime.now());
+
+                return ResponseEntity.badRequest().body(error);
+        }
+
         // 409 Conflict
         @ExceptionHandler(ResourceAlreadyExistsException.class)
         public ResponseEntity<ErrorResponse> handleResourceAlreadyExists(ResourceAlreadyExistsException exception) {
