@@ -10,6 +10,7 @@ import com.logden.backend.domain.CartItemRepository;
 import com.logden.backend.domain.CartRepository;
 import com.logden.backend.domain.Product;
 import com.logden.backend.domain.ProductRepository;
+import com.logden.backend.exception.ResourceNotFoundException;
 
 @Service
 public class CartService {
@@ -30,16 +31,16 @@ public class CartService {
 
     public Cart getCartById(Long id) {
         return cartRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cart not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
     }
 
     public CartItem addItem(Long cartId, Long productId, Integer quantity) {
 
         Cart cart = cartRepository.findById(cartId)
-                .orElseThrow(() -> new RuntimeException("Cart not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
 
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
         Optional<CartItem> existingItem = cartItemRepository.findByCartAndProduct(cart, product);
 
@@ -66,7 +67,7 @@ public class CartService {
     public CartItem updateQuantity(Long cartItemId, Integer quantity) {
 
         CartItem item = cartItemRepository.findById(cartItemId)
-                .orElseThrow(() -> new RuntimeException("Cart item not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
 
         item.setQuantity(quantity);
 
