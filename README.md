@@ -73,7 +73,7 @@ Hakee ostoskorin tunnisteen perusteella.
 #### POST
 
 ```http
-POST /api/cart/{cartId}/items
+POST /api/cart/{cartId}/items?productId={productId}&quantity={quantity}
 ```
 
 Lisää tuotteen ostoskoriin.
@@ -83,7 +83,7 @@ Lisää tuotteen ostoskoriin.
 #### PUT
 
 ```http
-PUT /api/cart/items/{cartItemId}
+PUT /api/cart/items/{cartItemId}?quantity={quantity}
 ```
 
 Päivittää ostoskorissa olevan tuotteen määrän.
