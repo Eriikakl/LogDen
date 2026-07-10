@@ -19,6 +19,7 @@ import com.logden.backend.domain.OrderItemRepository;
 import com.logden.backend.domain.OrderRepository;
 import com.logden.backend.domain.User;
 import com.logden.backend.domain.UserRepository;
+import com.logden.backend.exception.ResourceNotFoundException;
 
 @Service
 public class OrderService {
@@ -43,19 +44,19 @@ public class OrderService {
 
     public Order getOrderById(Long id) {
         return orderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
     }
 
     public Order createOrder(Long userId) {
 
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         Cart cart = cartRepository.findByUser(user)
-                .orElseThrow(() -> new RuntimeException("Cart not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
 
         if (cart.getItems().isEmpty()) {
-            throw new RuntimeException("Cart is empty");
+            throw new IllegalStateException("Cart is empty");
         }
 
         BigDecimal totalPrice = BigDecimal.ZERO;
