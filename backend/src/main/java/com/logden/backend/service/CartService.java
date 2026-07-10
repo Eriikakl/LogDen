@@ -36,6 +36,10 @@ public class CartService {
 
     public CartItem addItem(Long cartId, Long productId, Integer quantity) {
 
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than zero");
+        }
+
         Cart cart = cartRepository.findById(cartId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
 
@@ -61,10 +65,18 @@ public class CartService {
     }
 
     public void removeItem(Long cartItemId) {
-        cartItemRepository.deleteById(cartItemId);
+
+        CartItem item = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
+
+        cartItemRepository.delete(item);
     }
 
     public CartItem updateQuantity(Long cartItemId, Integer quantity) {
+
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than zero");
+        }
 
         CartItem item = cartItemRepository.findById(cartItemId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
