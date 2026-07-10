@@ -43,7 +43,7 @@ public class User {
     private String passwordHash;
 
     @NotBlank
-    private String role = "USER";
+    private String role; 
 
     public User(String firstname, String lastname, String address, String email, String phone, String passwordHash,
             String role) {
@@ -53,7 +53,7 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.passwordHash = passwordHash;
-        this.role = role;
+        this.role = (role == null || role.isBlank()) ? "USER" : role;
     }
 
     public User() {
