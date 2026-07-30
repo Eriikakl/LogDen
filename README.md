@@ -25,7 +25,7 @@ logden/
 
 - ```domain/``` sisältää sovelluksen JPA-entiteetit ja repositoryt.
 
-- ```dto/``` sisältää tiedonsiirto-oliot (DTO), joita käytetään API-vastauksissa ja myöhemmin myös API-pyynnöissä.
+- ```dto/``` sisältää tiedonsiirto-oliot (DTO), joita käytetään API-vastauksissa ja API-pyynnöissä.
 
 - ```exception/``` sisältää keskitetyn virheenkäsittelyn sekä sovelluksen poikkeukset.
 
