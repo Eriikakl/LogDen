@@ -29,7 +29,7 @@ logden/
 
 - ```exception/``` sisältää keskitetyn virheenkäsittelyn sekä sovelluksen poikkeukset.
 
-- ```security/``` sisältää Spring Securityn konfiguraation, kuten endpointtien käyttöoikeuksien määrittelyn ja kirjautumisen asetukset.
+- ```security/``` sisältää Spring Securityn konfiguraation, kuten endpointtien käyttöoikeuksien määrittelyn ja kirjautumisen asetukset sekä JWT-tokenien luonnin ja käsittelyn.
 
 - ```service/``` sisältää sovelluksen liiketoimintalogiikan.
 
@@ -47,6 +47,7 @@ logden/
 - Spring Web (REST API)
 - Spring Data JPA
 - Spring Security
+- JWT (JSON Web Token) -pohjainen autentikointi
 - Bean Validation
 - Maven
 - PostgreSQL
@@ -269,6 +270,31 @@ Hakee kaikki käyttäjät.
 
 </details>
 
+<details>
+<summary>Autentikointi / Authentication</summary>
+
+#### POST
+
+```http
+POST /api/auth/register
+```
+
+Rekisteröidään uusi käyttäjä.
+
+---
+
+#### POST
+
+```http
+POST /api/auth/login
+```
+
+Kirjaudutaan sähköpostilla ja salasanalla.
+
+---
+
+</details>
+
 ## Setup ja suoritus
 
 ### 1. Kloonataan repositorio
@@ -287,6 +313,15 @@ docker compose up -d
 ```
 
 ### 4. Ajetaan backend
+
+#### Ympäristömuuttujat
+
+- Ennen sovelluksen käynnistämistä määritetään ympäristömuuttujat:
+
+```bash
+export JWT_SECRET="oma-base64-muotoinen-avain"
+export JWT_EXPIRATION="3600000"
+```
 
 ```bash
 cd backend
