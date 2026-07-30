@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logden.backend.domain.User;
+import com.logden.backend.dto.LoginRequest;
+import com.logden.backend.dto.LoginResponse;
 import com.logden.backend.dto.RegisterRequest;
 import com.logden.backend.dto.UserDto;
 import com.logden.backend.service.UserService;
@@ -26,6 +28,12 @@ public class AuthController {
     public UserDto register(@Valid @RequestBody RegisterRequest request) {
         User user = userService.registerUser(request);
         return UserDto.fromEntity(user);
+    }
+
+    @PostMapping("/login")
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+        String token = userService.loginUser(request);
+        return new LoginResponse(token);
     }
 
 }

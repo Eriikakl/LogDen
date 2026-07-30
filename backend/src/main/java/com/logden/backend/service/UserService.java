@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.logden.backend.domain.User;
 import com.logden.backend.domain.UserRepository;
+import com.logden.backend.dto.LoginRequest;
 import com.logden.backend.dto.RegisterRequest;
 import com.logden.backend.exception.ResourceAlreadyExistsException;
 import com.logden.backend.exception.ResourceNotFoundException;
@@ -67,7 +68,6 @@ public class UserService {
         return userRepository.findAll();
     }
 
-
     public User registerUser(RegisterRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -84,5 +84,15 @@ public class UserService {
         user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
         user.setRole("USER");
         return userRepository.save(user);
+    }
+
+    public String loginUser(LoginRequest request) {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email"));
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
+            throw new IllegalArgumentException("Invalid password");
+        }
+        return "JWT_TOKEN"; // !!!
     }
 }
