@@ -12,16 +12,19 @@ import com.logden.backend.dto.LoginRequest;
 import com.logden.backend.dto.RegisterRequest;
 import com.logden.backend.exception.ResourceAlreadyExistsException;
 import com.logden.backend.exception.ResourceNotFoundException;
+import com.logden.backend.security.JwtService;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public User getUserById(Long id) {
@@ -93,6 +96,6 @@ public class UserService {
         if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
             throw new IllegalArgumentException("Invalid password");
         }
-        return "JWT_TOKEN"; // !!!
+        return jwtService.generateToken(user);
     }
 }
