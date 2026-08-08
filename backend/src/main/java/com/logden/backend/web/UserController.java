@@ -34,12 +34,6 @@ public class UserController {
         return UserDto.fromEntity(user);
     }
 
-    @PostMapping
-    public UserDto addUser(@Valid @RequestBody User user) {
-        User savedUser = userService.addUser(user);
-        return UserDto.fromEntity(savedUser);
-    }
-
     @PutMapping("/{id}")
     public UserDto updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
         User updatedUser = userService.updateUser(id, user);
