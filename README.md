@@ -59,7 +59,57 @@ logden/
 
 ## API
 
-REST API: Cart, Category, Order, Product, User
+REST API: Auth, Cart, Category, Order, Product, User
+
+<details>
+<summary>Autentikointi / Authentication</summary>
+
+#### POST - Rekisteröinti
+
+```http
+POST /api/auth/register
+```
+
+Rekisteröidään uusi käyttäjä.
+
+Request body: JSON
+```json
+{ 
+"firstName": "Eki", 
+"lastName": "Esimerkki", 
+"address": "Esimerkkikatu 12", 
+"email": "eki.esmes@example.com", 
+"phone": "0401234567", 
+"password": "salasana" 
+}
+```
+
+---
+
+#### POST - Kirjautuminen
+
+```http
+POST /api/auth/login
+```
+
+Kirjaudutaan sähköpostilla ja salasanalla.
+
+Request body: JSON
+```json
+{ 
+"email": "eki.esmes@example.com", 
+"password": "salasana"
+}
+```
+
+- Kirjautumisen jälkeen palvelin palauttaa JWT-tokenin.
+
+- Token lähetetään endpoint-kutsujen yhteydessä:
+Authorization: Bearer [JWT-token].
+
+---
+
+</details>
 
 <details>
 <summary>Ostoskori / Cart</summary>
@@ -261,49 +311,26 @@ Hakee kaikki käyttäjät.
 
 </details>
 
-<details>
-<summary>Autentikointi / Authentication</summary>
-
-#### POST
-
-```http
-POST /api/auth/register
-```
-
-Rekisteröidään uusi käyttäjä.
-
----
-
-#### POST
-
-```http
-POST /api/auth/login
-```
-
-Kirjaudutaan sähköpostilla ja salasanalla.
-
----
-
-</details>
-
 ## Setup ja suoritus
 
-### 1. Kloonataan repositorio
-
-### 2. Käynnistetään Dev Container
+### Käynnistetään Dev Container
 
 ```text
 Ctrl + Shift + P 
 --> Dev Containers: Reopen in Container
 ```
 
-### 3. Käynnistetään tietokanta
+**Sovellus voidaan myös suorittaa ilman Dev Containeria, jos koneelle asennettu Java 21 ja Maven.**
+
+### Käynnistetään tietokanta
+
+PostgreSQL-tietokanta suoritetaan Docker-kontissa.
 
 ```bash
 docker compose up -d
 ```
 
-### 4. Ajetaan backend
+###  Ajetaan backend
 
 #### Ympäristömuuttujat
 
