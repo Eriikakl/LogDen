@@ -231,15 +231,6 @@ GET /api/users/{id}
 Hakee käyttäjän tunnisteen perusteella.
 
 ---
-#### POST
-
-```http
-POST /api/users
-```
-
-Lisää uuden käyttäjän.
-
----
 #### PUT
 
 ```http
