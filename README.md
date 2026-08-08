@@ -48,7 +48,7 @@ logden/
 
 - ```exception/``` sisältää keskitetyn virheenkäsittelyn sekä sovelluksen poikkeukset.
 
-- ```security/``` sisältää Spring Securityn konfiguraation, kuten endpointtien käyttöoikeuksien määrittelyn sekä JWT-tokenien luonnin.
+- ```security/``` sisältää Spring Securityn konfiguraation, kuten endpointtien käyttöoikeuksien määrittelyn sekä JWT-tokenien luonnin, validoinnin, autentikointifilterin ja käyttäjätietojen lataamisen.
 
 - ```service/``` sisältää sovelluksen liiketoimintalogiikan.
 
