@@ -3,6 +3,25 @@ Kehityksessä.
 
 Tavoitteena on rakentaa kuvitteellinen full stack verkkokauppasovellus.
 
+## Teknologiat
+
+### Backend
+
+- Java 21
+- Spring Boot
+- Spring Web (REST API)
+- Spring Data JPA
+- Spring Security
+- JWT (JSON Web Token) -pohjainen autentikointi
+- Bean Validation
+- Maven
+- PostgreSQL
+
+
+### Kehitysympäristö
+- Docker
+- VS Code Dev Containers
+
 ## Projektirakenne
 
 ```text
@@ -37,25 +56,6 @@ logden/
 
 - **.devcontainer/** → kehitysympäristö Java/Maven
 - **docker-compose.yml** → tietokantapalvelu
-
-## Teknologiat
-
-### Backend
-
-- Java 21
-- Spring Boot
-- Spring Web (REST API)
-- Spring Data JPA
-- Spring Security
-- JWT (JSON Web Token) -pohjainen autentikointi
-- Bean Validation
-- Maven
-- PostgreSQL
-
-
-### Kehitysympäristö
-- Docker
-- VS Code Dev Containers
 
 ## API
 
