@@ -1,5 +1,6 @@
 package com.logden.backend.web;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import com.logden.backend.service.CartService;
 
 @RestController
 @RequestMapping("/api/cart")
+@PreAuthorize("hasRole('USER')")
 public class CartController {
 
     private final CartService cartService;
@@ -23,19 +25,16 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @GetMapping("/{id}")
-    public Cart getCart(@PathVariable Long id) {
-        return cartService.getCartById(id);
+    @GetMapping
+    public Cart getCart() {
+        return cartService.getCart();
 
     }
 
-    @PostMapping("/{cartId}/items")
-    public CartItem addItem(
-            @PathVariable Long cartId,
-            @RequestParam Long productId,
-            @RequestParam Integer quantity) {
+    @PostMapping("/items")
+    public CartItem addItem(@RequestParam Long productId, @RequestParam Integer quantity) {
 
-        return cartService.addItem(cartId, productId, quantity);
+        return cartService.addItem(productId, quantity);
     }
 
     @DeleteMapping("/items/{cartItemId}")
@@ -44,9 +43,7 @@ public class CartController {
     }
 
     @PutMapping("/items/{cartItemId}")
-    public CartItem updateQuantity(
-            @PathVariable Long cartItemId,
-            @RequestParam Integer quantity) {
+    public CartItem updateQuantity(@PathVariable Long cartItemId, @RequestParam Integer quantity) {
 
         return cartService.updateQuantity(cartItemId, quantity);
     }

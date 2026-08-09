@@ -10,6 +10,7 @@ import com.logden.backend.domain.CartItemRepository;
 import com.logden.backend.domain.CartRepository;
 import com.logden.backend.domain.Product;
 import com.logden.backend.domain.ProductRepository;
+import com.logden.backend.domain.User;
 import com.logden.backend.exception.ResourceNotFoundException;
 
 @Service
@@ -18,30 +19,36 @@ public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
     private final ProductRepository productRepository;
+    private final CurrentUserService currentUserService;
 
     public CartService(
             CartRepository cartRepository,
             CartItemRepository cartItemRepository,
-            ProductRepository productRepository) {
+            ProductRepository productRepository,
+            CurrentUserService currentUserService) {
 
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
         this.productRepository = productRepository;
+        this.currentUserService = currentUserService;
     }
 
-    public Cart getCartById(Long id) {
-        return cartRepository.findById(id)
+    
+    public Cart getCart() {
+        User user = currentUserService.getCurrentUser();
+
+        return cartRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
     }
 
-    public CartItem addItem(Long cartId, Long productId, Integer quantity) {
+    
+    public CartItem addItem(Long productId, Integer quantity) {
 
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity must be greater than zero");
         }
 
-        Cart cart = cartRepository.findById(cartId)
-                .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
+        Cart cart = getCart();
 
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
@@ -64,25 +71,40 @@ public class CartService {
         return cartItemRepository.save(newItem);
     }
 
+    
     public void removeItem(Long cartItemId) {
+
+        Cart cart = getCart();
 
         CartItem item = cartItemRepository.findById(cartItemId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
 
+        if (!item.getCart().equals(cart)) {
+            throw new ResourceNotFoundException("Cart item not found");
+        }
+
         cartItemRepository.delete(item);
     }
 
+   
     public CartItem updateQuantity(Long cartItemId, Integer quantity) {
 
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity must be greater than zero");
         }
 
+        Cart cart = getCart();
+
         CartItem item = cartItemRepository.findById(cartItemId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
+
+        if (!item.getCart().equals(cart)) {
+            throw new ResourceNotFoundException("Cart item not found");
+        }
 
         item.setQuantity(quantity);
 
         return cartItemRepository.save(item);
     }
+
 }
