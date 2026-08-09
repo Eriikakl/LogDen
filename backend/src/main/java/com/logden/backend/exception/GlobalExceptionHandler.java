@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,19 @@ public class GlobalExceptionHandler {
                                 LocalDateTime.now());
 
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
+
+        // 403 Forbidden
+        @ExceptionHandler(AuthorizationDeniedException.class)
+        public ResponseEntity<ErrorResponse> handleAuthorizationDenied(
+                        AuthorizationDeniedException exception) {
+
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.FORBIDDEN.value(),
+                                "Forbidden",
+                                LocalDateTime.now());
+
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
         }
 
         // 500 Internal Server Error
