@@ -32,7 +32,6 @@ public class CartService {
         this.productRepository = productRepository;
         this.currentUserService = currentUserService;
     }
-
     
     public Cart getCart() {
         User user = currentUserService.getCurrentUser();
@@ -41,14 +40,20 @@ public class CartService {
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
     }
 
-    
     public CartItem addItem(Long productId, Integer quantity) {
 
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity must be greater than zero");
         }
 
-        Cart cart = getCart();
+        User user = currentUserService.getCurrentUser();
+
+        Cart cart = cartRepository.findByUser(user)
+                .orElseGet(() -> {
+                    Cart newCart = new Cart();
+                    newCart.setUser(user);
+                    return cartRepository.save(newCart);
+                });
 
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
@@ -71,7 +76,6 @@ public class CartService {
         return cartItemRepository.save(newItem);
     }
 
-    
     public void removeItem(Long cartItemId) {
 
         Cart cart = getCart();
@@ -86,7 +90,6 @@ public class CartService {
         cartItemRepository.delete(item);
     }
 
-   
     public CartItem updateQuantity(Long cartItemId, Integer quantity) {
 
         if (quantity <= 0) {
