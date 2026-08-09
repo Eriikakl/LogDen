@@ -2,6 +2,7 @@ package com.logden.backend.web;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,19 +32,19 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    // Adminille
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Product addProduct(@Valid @RequestBody Product product) {
         return productService.addProduct(product);
     }
 
-    // Adminille
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Long id, @Valid @RequestBody Product product) {
         return productService.updateProduct(id, product);
     }
 
-    // Adminille
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
