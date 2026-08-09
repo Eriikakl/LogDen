@@ -2,6 +2,7 @@ package com.logden.backend.web;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,19 +32,19 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    // Adminille
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Category addCategory(@Valid @RequestBody Category category) {
         return categoryService.addCategory(category);
     }
 
-    // Adminille
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public Category updateCategory(@PathVariable Long id, @Valid @RequestBody Category category) {
         return categoryService.updateCategory(id, category);
     }
 
-    // Adminille
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
