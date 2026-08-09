@@ -1,5 +1,7 @@
 package com.logden.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +41,7 @@ public class User {
     @Size(max = 20)
     private String phone;
 
+    @JsonIgnore
     @NotBlank
     private String passwordHash;
 
