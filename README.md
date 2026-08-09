@@ -72,6 +72,8 @@ POST /api/auth/register
 
 Rekisteröidään uusi käyttäjä.
 
+Käyttöoikeus: ``Julkinen``
+
 Request body: JSON
 ```json
 { 
@@ -93,6 +95,8 @@ POST /api/auth/login
 ```
 
 Kirjaudutaan sähköpostilla ja salasanalla.
+
+Käyttöoikeus: ``Julkinen``
 
 Request body: JSON
 ```json
@@ -117,20 +121,24 @@ Authorization: Bearer [JWT-token].
 #### GET
 
 ```http
-GET /api/cart/{id}
+GET /api/cart
 ```
 
-Hakee ostoskorin tunnisteen perusteella.
+Hakee ostoskorin käyttäjän perusteella.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 ---
 
 #### POST
 
 ```http
-POST /api/cart/{cartId}/items?productId={productId}&quantity={quantity}
+POST /api/cart/items?productId={productId}&quantity={quantity}
 ```
 
 Lisää tuotteen ostoskoriin.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 ---
 
@@ -142,6 +150,8 @@ PUT /api/cart/items/{cartItemId}?quantity={quantity}
 
 Päivittää ostoskorissa olevan tuotteen määrän.
 
+Käyttöoikeus: Vaatii kirjautumisen. ``USER``
+
 ---
 
 #### DELETE
@@ -151,6 +161,8 @@ DELETE /api/cart/items/{cartItemId}
 ```
 
 Poistaa tuotteen ostoskorista.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 ---
 
@@ -167,6 +179,8 @@ GET /api/categories
 
 Hakee kaikki kategoriat.
 
+Käyttöoikeus: ``Julkinen``
+
 ---
 #### POST
 
@@ -176,6 +190,8 @@ POST /api/categories
 
 Lisää uuden kategorian.
 
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
+
 ---
 #### PUT
 ```http
@@ -184,6 +200,8 @@ PUT /api/categories/{id}
 
 Päivittää olemassa olevan kategorian.
 
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
+
 ---
 #### DELETE
 ```http
@@ -191,6 +209,8 @@ DELETE /api/categories/{id}
 ```
 
 Poistaa kategorian tunnisteen perusteella.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 ---
 
@@ -207,6 +227,8 @@ GET /api/orders
 
 Hakee kaikki tilaukset.
 
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
+
 ---
 #### GET
 
@@ -216,6 +238,8 @@ GET /api/orders/{id}
 
 Hakee tilauksen tunnisteen perusteella.
 
+Käyttöoikeus: Vaatii kirjautumisen. ``USER`` ``ADMIN``
+
 ---
 #### POST
 
@@ -224,6 +248,8 @@ POST /api/orders/user/{userId}
 ```
 
 Luo uuden tilauksen käyttäjän ostoskorin tuotteista.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 ---
 </details>
@@ -239,6 +265,8 @@ GET /api/products
 
 Hakee kaikki tuotteet.
 
+Käyttöoikeus: ``Julkinen``
+
 ---
 #### POST
 
@@ -248,6 +276,8 @@ POST /api/products
 
 Lisää uuden tuotteen.
 
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
+
 ---
 #### PUT
 ```http
@@ -256,6 +286,8 @@ PUT /api/products/{id}
 
 Päivittää olemassa olevan tuotteen.
 
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
+
 ---
 #### DELETE
 ```http
@@ -263,6 +295,8 @@ DELETE /api/products/{id}
 ```
 
 Poistaa tuotteen tunnisteen perusteella.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 ---
 
@@ -280,6 +314,8 @@ GET /api/users/{id}
 
 Hakee käyttäjän tunnisteen perusteella.
 
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
+
 ---
 #### PUT
 
@@ -288,6 +324,8 @@ PUT /api/users/{id}
 ```
 
 Päivittää olemassa olevan käyttäjän.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``USER`` ``ADMIN``
 
 ---
 #### DELETE
@@ -298,6 +336,8 @@ DELETE /api/users/{id}
 
 Poistaa käyttäjän tunnisteen perusteella.
 
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
+
 ---
 #### GET
 
@@ -306,6 +346,8 @@ GET /api/users
 ```
 
 Hakee kaikki käyttäjät.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 ---
 
