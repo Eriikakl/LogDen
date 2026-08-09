@@ -28,6 +28,12 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/user")
+    public List<Order> getUserOrders() {
+        return orderService.getUserOrders();
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public Order getOrder(@PathVariable Long id) {

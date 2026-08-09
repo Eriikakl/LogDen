@@ -110,6 +110,12 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public List<Order> getUserOrders() {
+        User user = currentUserService.getCurrentUser();
+
+        return orderRepository.findByUser(user);
+    }
+
     private String generateOrderNumber() {
         String orderNumber;
 
