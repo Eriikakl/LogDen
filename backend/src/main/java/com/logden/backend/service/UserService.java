@@ -10,6 +10,8 @@ import com.logden.backend.domain.User;
 import com.logden.backend.domain.UserRepository;
 import com.logden.backend.dto.LoginRequest;
 import com.logden.backend.dto.RegisterRequest;
+import com.logden.backend.dto.UpdateUserRequest;
+import com.logden.backend.dto.UpdateUserRoleRequest;
 import com.logden.backend.exception.ResourceAlreadyExistsException;
 import com.logden.backend.exception.ResourceNotFoundException;
 import com.logden.backend.security.JwtService;
@@ -20,11 +22,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final CurrentUserService currentUserService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
+    public UserService(UserRepository userRepository,
+            PasswordEncoder passwordEncoder,
+            JwtService jwtService,
+            CurrentUserService currentUserService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.currentUserService = currentUserService;
     }
 
     public User getUserById(Long id) {
@@ -39,22 +46,41 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(Long id, User updatedUser) {
+    public User updateUserRole(Long id, UpdateUserRoleRequest request) {
 
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        Optional<User> existingUser = userRepository.findByEmail(updatedUser.getEmail());
-        if (existingUser.isPresent() && !existingUser.get().getUserId().equals(id)) {
+        if (!request.getRole().equals("USER") &&
+                !request.getRole().equals("ADMIN")) {
+            throw new IllegalArgumentException("Invalid role");
+        }
+
+        user.setRole(request.getRole());
+
+        return userRepository.save(user);
+    }
+
+    public User updateCurrentUser(UpdateUserRequest request) {
+
+        User user = currentUserService.getCurrentUser();
+
+        Optional<User> existingUser = userRepository.findByEmail(request.getEmail());
+
+        if (existingUser.isPresent()
+                && !existingUser.get().getUserId().equals(user.getUserId())) {
             throw new ResourceAlreadyExistsException("Email already exists");
         }
 
-        user.setFirstName(updatedUser.getFirstName());
-        user.setLastName(updatedUser.getLastName());
-        user.setAddress(updatedUser.getAddress());
-        user.setEmail(updatedUser.getEmail());
-        user.setPhone(updatedUser.getPhone());
-        user.setPasswordHash(updatedUser.getPasswordHash());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setAddress(request.getAddress());
+        user.setEmail(request.getEmail());
+        user.setPhone(request.getPhone());
+
+        if (request.getPassword() != null && !request.getPassword().isBlank()) {
+            user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
+        }
 
         return userRepository.save(user);
     }
