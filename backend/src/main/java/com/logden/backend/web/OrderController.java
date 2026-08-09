@@ -2,6 +2,7 @@ package com.logden.backend.web;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,19 +22,28 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public Order getOrder(@PathVariable Long id) {
         return orderService.getOrderById(id);
 
     }
 
-    @PostMapping("/user/{userId}")
-    public Order createOrder(@PathVariable Long userId) {
-        return orderService.createOrder(userId);
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/user/{id}")
+    public Order getUserOrder(@PathVariable Long id) {
+        return orderService.getUserOrderById(id);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping
+    public Order createOrder() {
+        return orderService.createOrder();
     }
 }

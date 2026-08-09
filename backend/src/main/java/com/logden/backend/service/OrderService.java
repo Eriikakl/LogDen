@@ -18,7 +18,6 @@ import com.logden.backend.domain.OrderItem;
 import com.logden.backend.domain.OrderItemRepository;
 import com.logden.backend.domain.OrderRepository;
 import com.logden.backend.domain.User;
-import com.logden.backend.domain.UserRepository;
 import com.logden.backend.exception.ResourceNotFoundException;
 
 @Service
@@ -26,20 +25,20 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
-    private final UserRepository userRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
+    private final CurrentUserService currentUserService;
 
     public OrderService(OrderRepository orderRepository,
             OrderItemRepository orderItemRepository,
-            UserRepository userRepository,
             CartRepository cartRepository,
-            CartItemRepository cartItemRepository) {
+            CartItemRepository cartItemRepository,
+            CurrentUserService currentUserService) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
-        this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
+        this.currentUserService = currentUserService;
     }
 
     public Order getOrderById(Long id) {
@@ -47,10 +46,22 @@ public class OrderService {
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
     }
 
-    public Order createOrder(Long userId) {
+    public Order getUserOrderById(Long id) {
+        User user = currentUserService.getCurrentUser();
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
+
+        if (!order.getUser().equals(user)) {
+            throw new ResourceNotFoundException("Order not found");
+        }
+
+        return order;
+    }
+
+    public Order createOrder() {
+
+        User user = currentUserService.getCurrentUser();
 
         Cart cart = cartRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
