@@ -233,6 +233,17 @@ Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 #### GET
 
 ```http
+GET /api/orders/user
+```
+Hakee kaikki käyttäjän tilaukset.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``USER``
+
+---
+
+#### GET
+
+```http
 GET /api/orders/{id}
 ```
 
