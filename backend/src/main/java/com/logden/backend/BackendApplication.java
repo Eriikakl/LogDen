@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.logden.backend.domain.Cart;
 import com.logden.backend.domain.CartItem;
@@ -29,7 +30,7 @@ public class BackendApplication {
   public static void main(String[] args) {
     SpringApplication.run(BackendApplication.class, args);
   }
-
+/* 
   @Bean
   CommandLineRunner loadData(ProductRepository productRepository,
       CategoryRepository categoryRepository,
@@ -37,19 +38,29 @@ public class BackendApplication {
       CartRepository cartRepository,
       CartItemRepository cartItemRepository,
       OrderRepository orderRepository,
-      OrderItemRepository orderItemRepository) {
+      OrderItemRepository orderItemRepository,
+      PasswordEncoder passwordEncoder) {
     return args -> {
 
-      User user = userRepository.save(new User(
+      User user1 = userRepository.save(new User(
           "Erkki",
           "Esimerkki",
           "Testikatu 1, Helsinki",
           "erkki@example.com",
           "0401234567",
-          "salasana",
-          "CUSTOMER"));
+          passwordEncoder.encode("salasana"),
+          "USER"));
 
-      Cart cart = cartRepository.save(new Cart(user));
+      User user2 = userRepository.save(new User(
+          "Eki",
+          "Esimerkki",
+          "Testitie 1",
+          "eki@example.com",
+          "0401234567",
+          passwordEncoder.encode("salasana"),
+          "ADMIN"));
+
+      Cart cart = cartRepository.save(new Cart(user1));
 
       Category decoration = new Category("Puukoristeet", "Koristeeksi luotuja puuesineitä");
       categoryRepository.save(decoration);
@@ -70,18 +81,7 @@ public class BackendApplication {
           true,
           decoration));
 
-      // cartItemRepository.save(new CartItem(cart, product1, 2));
-      // cartItemRepository.save(new CartItem(cart, product2, 1));
-      //
-      // Order order = orderRepository.save(new Order(user, "PAID",
-      // LocalDateTime.now(), new BigDecimal("1099.70")));
-      // orderItemRepository.save(new OrderItem(
-      // order, product1, 2, product1.getPrice()));
-      //
-      // orderItemRepository.save(new OrderItem(
-      // order, product2, 1, product2.getPrice()));
-
     };
-  }
+  } */
 
 }
