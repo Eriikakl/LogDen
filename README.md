@@ -331,10 +331,21 @@ Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 #### PUT
 
 ```http
-PUT /api/users/{id}
+PUT /api/users/{id}/role
 ```
 
-Päivittää olemassa olevan käyttäjän.
+Päivittää käyttäjän roolin.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
+
+---
+#### PUT
+
+```http
+PUT /api/users/me
+```
+
+Päivittää kirjautuneen käyttäjän tietoja.
 
 Käyttöoikeus: Vaatii kirjautumisen. ``USER`` ``ADMIN``
 
