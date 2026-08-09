@@ -238,13 +238,24 @@ GET /api/orders/{id}
 
 Hakee tilauksen tunnisteen perusteella.
 
-Käyttöoikeus: Vaatii kirjautumisen. ``USER`` ``ADMIN``
+Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
+
+---
+#### GET
+
+```http
+GET /api/orders/user/{id}
+```
+
+Hakee käyttäjän tilauksen tilaustunnisteen perusteella.
+
+Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 ---
 #### POST
 
 ```http
-POST /api/orders/user/{userId}
+POST /api/orders
 ```
 
 Luo uuden tilauksen käyttäjän ostoskorin tuotteista.
