@@ -182,6 +182,17 @@ Hakee kaikki kategoriat.
 Käyttöoikeus: ``Julkinen``
 
 ---
+#### GET
+
+```http
+GET /api/categories/{id}
+```
+
+Hakee kategorian tunnisteen perusteella.
+
+Käyttöoikeus: ``Julkinen``
+
+---
 #### POST
 
 ```http
@@ -286,6 +297,17 @@ GET /api/products
 ```
 
 Hakee kaikki tuotteet.
+
+Käyttöoikeus: ``Julkinen``
+
+---
+#### GET
+
+```http
+GET /api/products/{id}
+```
+
+Hakee tuotteen tunnisteen perusteella.
 
 Käyttöoikeus: ``Julkinen``
 
