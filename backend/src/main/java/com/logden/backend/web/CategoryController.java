@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logden.backend.domain.Category;
+import com.logden.backend.domain.Product;
 import com.logden.backend.service.CategoryService;
 
 import jakarta.validation.Valid;
@@ -30,6 +31,11 @@ public class CategoryController {
     @GetMapping
     public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
+    }
+
+    @GetMapping("/{id}")
+    public Category getCategoryById(@PathVariable Long id) {
+        return categoryService.getCategoryById(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
