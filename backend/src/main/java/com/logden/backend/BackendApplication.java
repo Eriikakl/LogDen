@@ -1,7 +1,6 @@
 package com.logden.backend;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,14 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.logden.backend.domain.Cart;
-import com.logden.backend.domain.CartItem;
 import com.logden.backend.domain.CartItemRepository;
 import com.logden.backend.domain.CartRepository;
 import com.logden.backend.domain.Category;
 import com.logden.backend.domain.CategoryRepository;
 import com.logden.backend.domain.OrderItemRepository;
-import com.logden.backend.domain.Order;
-import com.logden.backend.domain.OrderItem;
 import com.logden.backend.domain.OrderRepository;
 import com.logden.backend.domain.Product;
 import com.logden.backend.domain.ProductRepository;
@@ -30,7 +26,7 @@ public class BackendApplication {
   public static void main(String[] args) {
     SpringApplication.run(BackendApplication.class, args);
   }
-/* 
+/*
   @Bean
   CommandLineRunner loadData(ProductRepository productRepository,
       CategoryRepository categoryRepository,
