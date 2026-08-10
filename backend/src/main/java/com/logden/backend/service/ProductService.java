@@ -19,12 +19,14 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    // Get all products
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-    // Adminille endpointit tuotteen lisäykseen, muokkaukseen ja poistoon
+    // Get a product by its ID
 
+    // Add a new product as an admin
     public Product addProduct(Product product) {
         if (productRepository.findByName(product.getName()).isPresent()) {
             throw new ResourceAlreadyExistsException("Product name already exists");
@@ -39,6 +41,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    // Update an existing product as an admin
     public Product updateProduct(Long id, Product updatedProduct) {
 
         Product product = productRepository.findById(id)
@@ -62,6 +65,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    // Delete a product as an admin
     public void deleteProduct(Long id) {
 
         Product product = productRepository.findById(id)

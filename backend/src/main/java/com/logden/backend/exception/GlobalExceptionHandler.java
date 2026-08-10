@@ -52,6 +52,7 @@ public class GlobalExceptionHandler {
         }
 
         // 400 Bad Request
+        // Handles validation errors when the request data is not valid
         @ExceptionHandler(MethodArgumentNotValidException.class)
         public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException exception) {
 
@@ -67,6 +68,7 @@ public class GlobalExceptionHandler {
         }
 
         // 400 Bad Request
+        // Handles cases where the current state of the application is not valid
         @ExceptionHandler(IllegalStateException.class)
         public ResponseEntity<ErrorResponse> handleIllegalStateException(
                         IllegalStateException exception) {
@@ -80,6 +82,7 @@ public class GlobalExceptionHandler {
         }
 
         // 400 Bad Request
+        // Handles cases where an invalid argument is given to a method
         @ExceptionHandler(IllegalArgumentException.class)
         public ResponseEntity<ErrorResponse> handleIllegalArgumentException(
                         IllegalArgumentException exception) {

@@ -19,17 +19,18 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    // Get all categories
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
 
+    // Get a category by its ID
     public Category getCategoryById(Long id) {
         return categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
     }
 
-    // Adminille endpointit kategorian lisäykseen, muokkaukseen ja poistoon
-
+    // Add a new category as an admin
     public Category addCategory(Category category) {
         if (categoryRepository.findByName(category.getName()).isPresent()) {
             throw new ResourceAlreadyExistsException("Category name already exists");
@@ -37,6 +38,7 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    // Update an existing category as an admin
     public Category updateCategory(Long id, Category updatedCategory) {
 
         Category category = categoryRepository.findById(id)
@@ -52,6 +54,7 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    // Delete a category as an admin
     public void deleteCategory(Long id) {
 
         Category category = categoryRepository.findById(id)

@@ -33,6 +33,7 @@ public class CartService {
         this.currentUserService = currentUserService;
     }
     
+    // Get the cart of the currently logged-in user
     public Cart getCart() {
         User user = currentUserService.getCurrentUser();
 
@@ -40,6 +41,7 @@ public class CartService {
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
     }
 
+    // Add item to the current user's cart
     public CartItem addItem(Long productId, Integer quantity) {
 
         if (quantity <= 0) {
@@ -76,6 +78,7 @@ public class CartService {
         return cartItemRepository.save(newItem);
     }
 
+    // Remove item from the current user's cart
     public void removeItem(Long cartItemId) {
 
         Cart cart = getCart();
@@ -90,6 +93,7 @@ public class CartService {
         cartItemRepository.delete(item);
     }
 
+    // Update item quantity in the current user's cart
     public CartItem updateQuantity(Long cartItemId, Integer quantity) {
 
         if (quantity <= 0) {

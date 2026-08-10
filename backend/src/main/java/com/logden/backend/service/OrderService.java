@@ -41,11 +41,13 @@ public class OrderService {
         this.currentUserService = currentUserService;
     }
 
+    // Get an order by its ID
     public Order getOrderById(Long id) {
         return orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
     }
 
+    // Get an order by ID if it belongs to the current user
     public Order getUserOrderById(Long id) {
         User user = currentUserService.getCurrentUser();
 
@@ -59,6 +61,7 @@ public class OrderService {
         return order;
     }
 
+    // Create an order using the items in the current user's cart
     public Order createOrder() {
 
         User user = currentUserService.getCurrentUser();
@@ -106,16 +109,19 @@ public class OrderService {
         return order;
     }
 
+    // Get all orders
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
 
+    // Get all orders of the current user
     public List<Order> getUserOrders() {
         User user = currentUserService.getCurrentUser();
 
         return orderRepository.findByUser(user);
     }
 
+    // Generate a unique order number
     private String generateOrderNumber() {
         String orderNumber;
 

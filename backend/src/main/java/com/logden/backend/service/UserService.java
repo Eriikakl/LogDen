@@ -34,18 +34,13 @@ public class UserService {
         this.currentUserService = currentUserService;
     }
 
+    // Get a user by its ID
     public User getUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
-    public User addUser(User user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new ResourceAlreadyExistsException("Email already exists");
-        }
-        return userRepository.save(user);
-    }
-
+    // Update a user's role as an admin
     public User updateUserRole(Long id, UpdateUserRoleRequest request) {
 
         User user = userRepository.findById(id)
@@ -61,6 +56,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    // Update the current user's information
     public User updateCurrentUser(UpdateUserRequest request) {
 
         User user = currentUserService.getCurrentUser();
@@ -85,6 +81,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    // Delete a user as an admin
     public void deleteUser(Long id) {
 
         User user = userRepository.findById(id)
@@ -93,10 +90,12 @@ public class UserService {
         userRepository.delete(user);
     }
 
+    // Get all users as an admin
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    // Register a new user
     public User registerUser(RegisterRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -115,6 +114,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    // Log in the user
     public String loginUser(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email"));

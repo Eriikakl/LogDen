@@ -28,12 +28,14 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
+    // Get all orders of the current user
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/user")
     public List<Order> getUserOrders() {
         return orderService.getUserOrders();
     }
 
+    // Get an order by its ID
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public Order getOrder(@PathVariable Long id) {
@@ -41,12 +43,14 @@ public class OrderController {
 
     }
 
+    // Get an order by ID if it belongs to the current user
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/user/{id}")
     public Order getUserOrder(@PathVariable Long id) {
         return orderService.getUserOrderById(id);
     }
 
+    // Create an order using the items in the current user's cart
     @PreAuthorize("hasRole('USER')")
     @PostMapping
     public Order createOrder() {
