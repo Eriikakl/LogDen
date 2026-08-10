@@ -25,6 +25,10 @@ public class ProductService {
     }
 
     // Get a product by its ID
+    public Product getProductById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+    }
 
     // Add a new product as an admin
     public Product addProduct(Product product) {

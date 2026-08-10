@@ -32,6 +32,11 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable Long id) {
+        return productService.getProductById(id);
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Product addProduct(@Valid @RequestBody Product product) {
