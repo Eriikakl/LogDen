@@ -323,7 +323,9 @@ Hakee ostoskorin käyttäjän perusteella.
 Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 Response:
+
 200 OK - Käyttäjän ostoskori haettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut. 
 
 ---
@@ -339,9 +341,13 @@ Lisää tuotteen ostoskoriin.
 Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 Response:
+
 200 OK - Tuote lisättiin ostoskoriin onnistuneesti.
+
 400 Bad Request - Pyynnön tiedot ovat virheelliset tai vaadittu parametri puuttuu.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 404 Not Found - Tuotetta ei löydy.
 
 ---
@@ -357,8 +363,11 @@ Päivittää ostoskorissa olevan tuotteen määrän.
 Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 Response:
+
 200 OK - Tuotteen määrä päivitettiin onnistuneesti.
+
 400 Bad Request - Pyynnön tiedot ovat virheelliset tai vaadittu parametri puuttuu.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
 
 ---
@@ -374,8 +383,11 @@ Poistaa tuotteen ostoskorista.
 Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 Response:
+
 204 No Content - Tuote poistettiin ostoskorista onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 404 Not Found - Tuotetta ei löydy.
 
 ---
@@ -396,6 +408,7 @@ Hakee kaikki kategoriat.
 Käyttöoikeus: ``Julkinen``
 
 Response:
+
 200 OK - Kategoriat haettiin onnistuneesti.
 
 ---
@@ -410,7 +423,9 @@ Hakee kategorian tunnisteen perusteella.
 Käyttöoikeus: ``Julkinen``
 
 Response:
+
 200 OK - Kategoriat haettiin onnistuneesti.
+
 404 Not Found - Kategoriaa ei löydy.
 
 ---
@@ -425,10 +440,15 @@ Lisää uuden kategorian.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 201 Created - Kategoria lisättiin onnistuneesti.
+
 400 Bad Request - Pyynnön tiedot ovat virheelliset tai vaadittu parametri puuttuu.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 409 Conflict - Kategorian nimi on jo käytössä.
 
 ---
@@ -442,10 +462,15 @@ Päivittää olemassa olevan kategorian.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 200 OK - Kategoria päivitettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 404 Not Found - Kategoriaa ei löydy.
+
 409 Conflict - Kategorian nimi on jo käytössä.
 
 ---
@@ -459,10 +484,15 @@ Poistaa kategorian tunnisteen perusteella.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 204 No Content - Kategoria poistettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 404 Not Found - Kategoriaa ei löydy.
+
 409 Conflict - Kategoriaa ei voida poistaa, koska siihen liittyy tuotteita.
 
 ---
@@ -483,8 +513,11 @@ Hakee kaikki tilaukset.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 200 OK - Tilaukset haettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
 
 
@@ -499,8 +532,11 @@ Hakee kaikki käyttäjän tilaukset.
 Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 Response:
+
 200 OK - Käyttäjän tilaukset haettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``ADMIN``.
 
 ---
@@ -516,9 +552,13 @@ Hakee tilauksen tunnisteen perusteella.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 200 OK - Tilaus haettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 404 Not Found - Tilausta ei löydy.
 
 ---
@@ -533,9 +573,13 @@ Hakee käyttäjän tilauksen tilaustunnisteen perusteella.
 Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 Response:
+
 200 OK - Käyttäjän tilaus haettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``ADMIN``.
+
 404 Not Found - Tilausta ei löydy.
 
 
@@ -552,9 +596,13 @@ Luo uuden tilauksen käyttäjän ostoskorin tuotteista.
 Käyttöoikeus: Vaatii kirjautumisen. ``USER``
 
 Response:
+
 201 Created - Käyttäjän tilaus luotiin onnistuneesti.
+
 400 Bad Request - Ostoskori on tyhjä.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``ADMIN``.
 
 ---
@@ -574,6 +622,7 @@ Hakee kaikki tuotteet.
 Käyttöoikeus: ``Julkinen``
 
 Response:
+
 200 OK - Tuotteet haettiin onnistuneesti.
 
 ---
@@ -588,7 +637,9 @@ Hakee tuotteen tunnisteen perusteella.
 Käyttöoikeus: ``Julkinen``
 
 Response:
+
 200 OK - Tuote haettiin onnistuneesti.
+
 404 Not Found - Tuotetta ei löydy.
 
 ---
@@ -603,11 +654,17 @@ Lisää uuden tuotteen.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 201 Created - Tuote lisättiin onnistuneesti.
+
 400 Bad Request - Pyynnön tiedot ovat virheelliset tai vaadittu parametri puuttuu.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 404 Not Found - Kategoriaa ei löydy.
+
 409 Conflict - Tuotteen nimi on jo käytössä.
 
 ---
@@ -621,11 +678,17 @@ Päivittää olemassa olevan tuotteen.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 200 OK - Tuote päivitettiin onnistuneesti.
+
 400 Bad Request - Pyynnön tiedot ovat virheelliset tai vaadittu parametri puuttuu.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 404 Not Found - Kategoriaa ei löydy.
+
 409 Conflict - Tuotteen nimi on jo käytössä.
 
 ---
@@ -639,10 +702,15 @@ Poistaa tuotteen tunnisteen perusteella.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 204 No Content - Tuote poistettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 404 Not Found - Tuotetta ei löydy.
+
 409 Conflict - Tuotetta ei voida poistaa, koska sitä käytetään tilauksissa.
 
 ---
@@ -664,9 +732,13 @@ Hakee käyttäjän tunnisteen perusteella.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 200 OK - Käyttäjä haettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 404 Not Found - Käyttäjää ei löydy.
 
 ---
@@ -681,10 +753,15 @@ Päivittää käyttäjän roolin.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 200 OK - Käyttäjän rooli päivitettiin onnistuneesti.
+
 400 Bad Request - Pyynnön tiedot ovat virheelliset tai vaadittu parametri puuttuu.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 404 Not Found - Käyttäjää ei löydy.
 
 
@@ -700,9 +777,13 @@ Päivittää kirjautuneen käyttäjän tietoja.
 Käyttöoikeus: Vaatii kirjautumisen. ``USER`` ``ADMIN``
 
 Response:
+
 200 OK - Käyttäjän tiedot päivitettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 400 Bad Request - Pyynnön tiedot ovat virheelliset tai vaadittu parametri puuttuu.
+
 409 Conflict - Sähköposti on jo käytössä.
 
 ---
@@ -717,9 +798,13 @@ Poistaa käyttäjän tunnisteen perusteella.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 204 No Content - Käyttäjä poistettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 409 Conflict - Käyttäjää ei voida poistaa, koska käyttäjällä on tilauksia.
 
 ---
@@ -734,9 +819,13 @@ Hakee kaikki käyttäjät.
 Käyttöoikeus: Vaatii kirjautumisen. ``ADMIN``
 
 Response:
+
 200 OK - Käyttäjät haettiin onnistuneesti.
+
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
 403 Forbidden - Käyttäjän rooli on ``USER``.
+
 
 ---
 
