@@ -326,7 +326,9 @@ Response:
 
 200 OK - Käyttäjän ostoskori haettiin onnistuneesti.
 
-401 Unauthorized - Käyttäjä ei ole kirjautunut. 
+401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
+403 Forbidden - Käyttäjän rooli on ``ADMIN``.
 
 ---
 
@@ -347,6 +349,8 @@ Response:
 400 Bad Request - Pyynnön tiedot ovat virheelliset tai vaadittu parametri puuttuu.
 
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
+403 Forbidden - Käyttäjän rooli on ``ADMIN``.
 
 404 Not Found - Tuotetta ei löydy.
 
@@ -370,6 +374,8 @@ Response:
 
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
 
+403 Forbidden - Käyttäjän rooli on ``ADMIN``.
+
 ---
 
 #### DELETE
@@ -387,6 +393,8 @@ Response:
 204 No Content - Tuote poistettiin ostoskorista onnistuneesti.
 
 401 Unauthorized - Käyttäjä ei ole kirjautunut.
+
+403 Forbidden - Käyttäjän rooli on ``ADMIN``.
 
 404 Not Found - Tuotetta ei löydy.
 
@@ -805,7 +813,7 @@ Response:
 
 403 Forbidden - Käyttäjän rooli on ``USER``.
 
-409 Conflict - Käyttäjää ei voida poistaa, koska käyttäjällä on tilauksia.
+409 Conflict - Käyttäjää ei voida poistaa, koska käyttäjällä on tilauksia tai luotu ostoskori.
 
 ---
 #### GET
