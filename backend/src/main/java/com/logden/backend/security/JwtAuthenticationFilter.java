@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,20 +32,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization"); 
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            // Extract the token and username (email) from the request
             String token = authHeader.substring(7);
-            String username = jwtService.extractUsername(token);
-            // Load the user from the database
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-            // Validate the token before authenticating the user
-            if (jwtService.isTokenValid(token, userDetails)) {
-                // Set the authenticated user in the security context
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        userDetails,
-                        null,
-                        userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+            try {
+                String username = jwtService.extractUsername(token);
+
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+                if (jwtService.isTokenValid(token, userDetails, username)) {
+
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(
+                                    userDetails,
+                                    null,
+                                    userDetails.getAuthorities());
+
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+
+            } catch (JwtException | IllegalArgumentException exception) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setContentType("application/json");
+                response.getWriter().write(
+                        "{\"status\":401,\"message\":\"Invalid or expired token\"}");
+                return;
             }
         }
 
