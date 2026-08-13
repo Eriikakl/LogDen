@@ -59,6 +59,20 @@ logden/
 
 ---
 
+## Tietokannan rakenne
+
+Keskeiset entiteetit:
+
+- User — asiakastilit, autentikointitiedot ja roolipohjainen käyttöoikeuksien hallinta.
+- Product — verkkokaupan tuotteet.
+- Category — tuotteiden ryhmittely kategorioihin.
+- Cart / CartItem — käyttäjän aktiivinen ostoskori ja sen sisältö.
+- Order / OrderItem — tehdyt tilaukset ja niiden sisältämät tilausrivit.
+
+### Tietokantakaavio 
+
+![Tietokantakaavio](docs/images/database-schema.png)
+
 ## API
 
 REST API: Auth, Cart, Category, Order, Product, User
