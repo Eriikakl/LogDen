@@ -7,47 +7,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-        // 404 Not Found
-        @ExceptionHandler(ResourceNotFoundException.class)
-        public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException exception) {
+        // 400 Bad Request
+        // Handles cases where a required request parameter is missing
+        @ExceptionHandler(MissingServletRequestParameterException.class)
+        public ResponseEntity<ErrorResponse> handleMissingRequestParameter(
+                        MissingServletRequestParameterException exception) {
 
                 ErrorResponse error = new ErrorResponse(
-                                HttpStatus.NOT_FOUND.value(),
-                                exception.getMessage(),
+                                HttpStatus.BAD_REQUEST.value(),
+                                "Required parameter '" + exception.getParameterName() + "' is missing",
                                 LocalDateTime.now());
 
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-        }
-
-        // 403 Forbidden
-        @ExceptionHandler(AuthorizationDeniedException.class)
-        public ResponseEntity<ErrorResponse> handleAuthorizationDenied(
-                        AuthorizationDeniedException exception) {
-
-                ErrorResponse error = new ErrorResponse(
-                                HttpStatus.FORBIDDEN.value(),
-                                "Forbidden",
-                                LocalDateTime.now());
-
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
-        }
-
-        // 500 Internal Server Error
-        @ExceptionHandler(Exception.class)
-        public ResponseEntity<ErrorResponse> handleException(Exception exception) {
-
-                ErrorResponse error = new ErrorResponse(
-                                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                                "Unexpected error occurred",
-                                LocalDateTime.now());
-
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                                 .body(error);
         }
 
@@ -95,6 +73,31 @@ public class GlobalExceptionHandler {
                 return ResponseEntity.badRequest().body(error);
         }
 
+        // 403 Forbidden
+        @ExceptionHandler(AuthorizationDeniedException.class)
+        public ResponseEntity<ErrorResponse> handleAuthorizationDenied(
+                        AuthorizationDeniedException exception) {
+
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.FORBIDDEN.value(),
+                                "Forbidden",
+                                LocalDateTime.now());
+
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+        }
+
+        // 404 Not Found
+        @ExceptionHandler(ResourceNotFoundException.class)
+        public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException exception) {
+
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.NOT_FOUND.value(),
+                                exception.getMessage(),
+                                LocalDateTime.now());
+
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
+
         // 409 Conflict
         @ExceptionHandler(ResourceAlreadyExistsException.class)
         public ResponseEntity<ErrorResponse> handleResourceAlreadyExists(ResourceAlreadyExistsException exception) {
@@ -106,4 +109,18 @@ public class GlobalExceptionHandler {
 
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
         }
+
+        // 500 Internal Server Error
+        @ExceptionHandler(Exception.class)
+        public ResponseEntity<ErrorResponse> handleException(Exception exception) {
+
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                                "Unexpected error occurred",
+                                LocalDateTime.now());
+
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                .body(error);
+        }
+
 }
