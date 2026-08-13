@@ -21,11 +21,11 @@ public class User {
     private Long userId;
 
     @NotBlank
-    @Size(max = 25)
+    @Size(max = 100)
     private String firstName;
 
     @NotBlank
-    @Size(max = 25)
+    @Size(max = 100)
     private String lastName;
 
     @NotBlank
@@ -46,6 +46,7 @@ public class User {
     private String passwordHash;
 
     @NotBlank
+    @Size(max = 20)
     private String role; 
 
     public User(String firstname, String lastname, String address, String email, String phone, String passwordHash,
