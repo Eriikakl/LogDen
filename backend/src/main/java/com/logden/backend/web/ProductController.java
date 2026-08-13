@@ -40,6 +40,7 @@ public class ProductController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Product addProduct(@Valid @RequestBody Product product) {
         return productService.addProduct(product);

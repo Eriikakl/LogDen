@@ -1,8 +1,10 @@
 package com.logden.backend.web;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logden.backend.domain.User;
@@ -24,6 +26,7 @@ public class AuthController {
         this.userService = userService;
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/register")
     public UserDto register(@Valid @RequestBody RegisterRequest request) {
         User user = userService.registerUser(request);
