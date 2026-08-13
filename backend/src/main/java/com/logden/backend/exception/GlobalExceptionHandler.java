@@ -2,6 +2,7 @@ package com.logden.backend.exception;
 
 import java.time.LocalDateTime;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authorization.AuthorizationDeniedException;
@@ -99,6 +100,7 @@ public class GlobalExceptionHandler {
         }
 
         // 409 Conflict
+        // Handles attempts to create a resource that already exists
         @ExceptionHandler(ResourceAlreadyExistsException.class)
         public ResponseEntity<ErrorResponse> handleResourceAlreadyExists(ResourceAlreadyExistsException exception) {
 
@@ -108,6 +110,21 @@ public class GlobalExceptionHandler {
                                 LocalDateTime.now());
 
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+        }
+
+        // 409 Conflict
+        // Handles attempts to delete resources that are referenced by other resources
+        @ExceptionHandler(DataIntegrityViolationException.class)
+        public ResponseEntity<ErrorResponse> handleDataIntegrityViolation(
+                        DataIntegrityViolationException exception) {
+
+                ErrorResponse error = new ErrorResponse(
+                                HttpStatus.CONFLICT.value(),
+                                "Resource cannot be deleted because it is referenced by other resources",
+                                LocalDateTime.now());
+
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                                .body(error);
         }
 
         // 500 Internal Server Error
